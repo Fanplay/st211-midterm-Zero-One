@@ -15,9 +15,50 @@ from bookstore_app import Users, Catalog, Cart
 
 @pytest.mark.smoke
 def test_example_register():
-    """Author: <example>. Smoke: a new user can register."""
-    assert Users().register("newuser", "password123") is True
-
+    """Author: Shine Khant Moe (6705142926). Smoke: a new user can register."""
+    users = Users()
+    result = users.register("shine", "password123")
+    assert result is True
+    assert users.users["shine"] == "password123"
+    
+@pytest.mark.smoke
+def test_login_success():
+    """Author: Shine Khant Moe (6705142926). Smoke: test for login."""
+    users = Users()
+    users.register("shine", "password123")
+    result = users.login("shine", "password123")
+    assert result is True
+    
+@pytest.mark.smoke
+def test_add_product():
+    """Author: Shine Khant Moe (6705142926). Smoke: test for adding a product."""
+    catalog = Catalog()
+    catalog.add_product(1, "Book", 500)
+    assert 1 in catalog.products
+    assert catalog.products[1]["title"] == "Book"
+    assert catalog.products[1]["price"] == 500
+    
+@pytest.mark.smoke
+def test_add_to_cart():
+    """Author: Shine Khant Moe (6705142926). Smoke: test for adding to cart."""
+    catalog = Catalog()
+    catalog.add_product(1, "Book", 500)
+    cart = Cart(catalog)
+    result = cart.add(1)
+    assert result is True
+    assert 1 in cart.items
+    
+@pytest.mark.smoke
+def test_checkout():
+    """Author: Shine Khant Moe (6705142926). Smoke: test for checkout."""
+    catalog = Catalog()
+    catalog.add_product(1, "Book", 500)
+    cart = Cart(catalog)
+    cart.add(1)
+    result = cart.checkout()
+    assert result == [1]
+    assert cart.items == []
+    assert cart.history() == [[1]]
 
 # ---- YOUR SMOKE TESTS (at least 5) ----
 
