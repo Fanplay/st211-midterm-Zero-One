@@ -12,6 +12,7 @@ Run:  pytest            (all)     pytest -m smoke     pytest -m regression
 import pytest
 from bookstore_app import Users, Catalog, Cart
 
+# ---- YOUR SMOKE TESTS (at least 5) ----
 
 @pytest.mark.smoke
 def test_example_register():
@@ -60,8 +61,28 @@ def test_checkout():
     assert cart.items == []
     assert cart.history() == [[1]]
 
-# ---- YOUR SMOKE TESTS (at least 5) ----
 
 # ---- YOUR REGRESSION TESTS (the bug hunt) ----
 
 # ---- YOUR SLOW TESTS (at least 2) ----
+@pytest.mark.slow
+def test_large_product():
+    """Author: Shine Khant Moe (6705142926). Slow: test for adding large product."""
+    catalog = Catalog()
+    cart = Cart(catalog)
+    products = [
+        (i, f"Book {i}", i + 1)
+        for i in range(50000) #50,000 products
+    ]
+    cart.import_products(products) == 50000
+    assert len(catalog.products) == 50000
+    
+@pytest.mark.slow
+def test_large_catalog_search():
+    """Author: Shine Khant Moe (6705142926). Slow: test for searching in a large catalog."""
+    catalog = Catalog()
+    for i in range(50000):
+        catalog.add_product(i, f"Book {i}", 100)
+    for _ in range(500):
+            results = catalog.search("Book")
+    assert len(results) == 50000
