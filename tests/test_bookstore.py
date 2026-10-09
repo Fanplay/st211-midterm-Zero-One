@@ -63,7 +63,22 @@ def test_checkout():
 
 
 # ---- YOUR REGRESSION TESTS (the bug hunt) ----
-
+@pytest.mark.regression
+def test_cart_total_item():
+    """ Author: Shine Khant Moe (6705142026).
+        Function: Cart.total().
+        Wrong behavior: the final product in the cart is not included in the total.
+        Correct behavior: every product in the cart should be included in the total.
+    """
+    catalog = Catalog()
+    catalog.add_product(1, "Book A", 10)
+    catalog.add_product(2, "Book B", 20)
+    cart = Cart(catalog)
+    cart.add(1)
+    cart.add(2)
+    assert cart.total() == 30
+    
+    
 # ---- YOUR SLOW TESTS (at least 2) ----
 @pytest.mark.slow
 def test_large_product():
