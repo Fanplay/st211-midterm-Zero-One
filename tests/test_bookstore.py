@@ -132,6 +132,23 @@ def test_search_keyword():
     catalog.add_product(1, "Book A", 30)
     assert catalog.search("book") == [1]
 
+@pytest.mark.regression
+def test_history_orders_data():
+    """
+    Author: Shine Khant Moe (6705142026)
+    Function: Cart.history()
+    Wrong behavior: modifying returned history also modifies the Cart's internal order history.
+    Correct behavior:  Callers must not modify internal history through the returned value.
+    """
+    catalog = Catalog()
+    catalog.add_product(1, "Book A", 10)
+    cart = Cart(catalog)
+    cart.add(1)
+    cart.checkout()
+    history = cart.history()
+    history[0].append(999)
+    assert cart.history() == [[1]]  # The internal history should remain unchanged
+
 # ---- YOUR SLOW TESTS (at least 2) ----
 @pytest.mark.slow
 def test_large_product():
