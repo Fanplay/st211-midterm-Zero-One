@@ -78,6 +78,18 @@ def test_cart_total_item():
     cart.add(2)
     assert cart.total() == 30
     
+@pytest.mark.regression
+def test_checkout_empty_cart():
+     """ Author: Shine Khant Moe (6705142026).
+            Function: Cart.checkout().
+            Wrong behavior: checkout returns None for an empty cart.
+            Correct behavior: checkout should return an empty list for an empty cart.
+    """
+     catalog = Catalog()
+     cart = Cart(catalog)
+     result = cart.checkout()
+     assert result is None
+     assert cart.history() == []
     
 # ---- YOUR SLOW TESTS (at least 2) ----
 @pytest.mark.slow
