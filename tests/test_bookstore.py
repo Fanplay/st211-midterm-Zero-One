@@ -120,7 +120,17 @@ def test_login_password():
     users.register("shine", "pass@word123")
     assert users.login("shine", "pass@word123") is True
 
-
+@pytest.mark.regression
+def test_search_keyword():
+    """
+    Author: Shine Khant Moe (6705142026)
+    Function: Catalog.search()
+    Wrong behavior: title is missed when the keyword uses different capitalization
+    Correct behavior: Should match regardless of letter case
+    """
+    catalog = Catalog()
+    catalog.add_product(1, "Book A", 30)
+    assert catalog.search("book") == [1]
 
 # ---- YOUR SLOW TESTS (at least 2) ----
 @pytest.mark.slow
