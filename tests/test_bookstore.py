@@ -107,6 +107,20 @@ def test_import_products_count():
         (3, "Book C", 30)
     ])
     assert result == 3
+    
+@pytest.mark.regression   
+def test_login_password():
+    """
+    Author: Shine Khant Moe (6705142026)
+    Function: User.login()
+    Wrong behavior: The function does not correctly register when it contains special characters.
+    Correct behavior: The function should correctly register with special characters.
+    """
+    users = Users()
+    users.register("shine", "pass@word123")
+    assert users.login("shine", "pass@word123") is True
+
+
 
 # ---- YOUR SLOW TESTS (at least 2) ----
 @pytest.mark.slow
