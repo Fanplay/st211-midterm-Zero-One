@@ -91,6 +91,23 @@ def test_checkout_empty_cart():
      assert result is None
      assert cart.history() == []
     
+@pytest.mark.regression
+def test_import_products_count():
+    """
+    Author: Shine Khant Moe (6705142026).
+    Function: Cart.import_products().
+    Wrong behavior: The function does not correctly count the number of imported products.
+    Correct behavior: The function should return the correct count of imported products.
+    """
+    catalog = Catalog()
+    cart = Cart(catalog)
+    result = cart.import_products([
+        (1, "Book A", 10),
+        (2, "Book B", 20),
+        (3, "Book C", 30)
+    ])
+    assert result == 3
+
 # ---- YOUR SLOW TESTS (at least 2) ----
 @pytest.mark.slow
 def test_large_product():
