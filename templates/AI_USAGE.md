@@ -1,11 +1,10 @@
 # AI_USAGE.md -- Declaration and audit
 
-Group: <Zero One>   Members: <Shine Khant Moe (6705142026)>
-                             <Alex (6705142001)>
+Group: <name>   Members: <names>
 
 ## D3.1 Declaration (required)
 | AI tool | How we used it |
-| ChatGPT| Used to explain the assignment, Where do i put the codes, Suggestion for how do the assignment and code, and All generated code was reviewed, modified, and validated manually before use.  |
+|---|---|
 | | |
 
 ## D3.2 Audit of the supplied ai_review/ test set (graded core)
