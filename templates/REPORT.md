@@ -25,9 +25,8 @@ Because these tests take longer than smoke tests, they are better suited to be s
              This test is designed to utilize a very large catalog in order to evaluate system behavior under substantial data volume. Preparing and processing one million titles significantly increases the duration compared to a standard smoke test.
 
 ## Part F -- Team reflection
-1. Why is running only regression tests before every commit inefficient?
-2. Why do smoke tests usually run first in a CI/CD pipeline?
-3. What risks arise if slow tests are never run?
-4. Can one test belong to two categories? Give an example.
-5. Bug-finders and bug-fixers are often different people in a real QA team.
-   What does that separation change about how a bug report must be written?
+1. Running only regression tests before every commit is inefficient because they focus on previously discovered bugs and grow as the project expands.
+2. Smoke tests usually run first because they are fast and check the application's core functionality.
+3. If you never run slow tests, problems that appear only with large data or repeated operations may go undiscovered; an application may work correctly with a small dataset but fail, become unreliable, or perform badly with realistic workloads
+4. Yes. A test can have characteristics of more than one category; for example, a test checking a previously fixed bug while processing 100,000 orders could be both a regression test and a slow test.
+5. When the bug finder and bug fixer are different people, the bug report must be clear, specific, and reproducible. It should describe the affected function, the exact steps or input used, the actual result, the expected result, and any useful evidence, such as pytest output, so the developer can understand and reproduce the problem without relying on the tester's memory. It also makes it easier to confirm that the fix solves the original defect.
